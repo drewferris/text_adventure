@@ -1,5 +1,14 @@
-var gulp = require('gulp');
-var webpack = require('webpack-stream');
+const gulp = require('gulp');
+const del = require('del');
+const webpack = require('webpack-stream');
+const Server = require('karma').Server;
+
+const paths = {
+  html: './app/index.hmtl',
+  js: './app/js/client.js',
+  css: ',/app/css/app.css',
+  tests: './test/comtroller_test.js'
+};
 
 gulp.task('webpack:dev', function() {
   return gulp.src('./app/js/client.js')
