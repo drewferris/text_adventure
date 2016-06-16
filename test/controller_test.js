@@ -54,5 +54,56 @@ describe('controller tests', () => {
     it('gamelog should have things in it', () => {
       expect(drew.gamelog.length).not.toBe(-1);
     });
+
+    it('gamerLocation should be monsterroomwithoutswag', () => {
+      expect(drew.gamerLocation).toBe('monsterroomwithoutswag');
+    });
+  });
+
+  describe('processInput function tests for monsterroomwithoutswag', () => {
+    beforeEach(() => {
+      drew.startGame();
+      drew.gamerLocation = 'monsterroomwithoutswag';
+    });
+
+    it('swag on the swag monster command should prompt properly', () => {
+      drew.command = 'swag on the swag monster';
+      drew.processInput();
+      expect(drew.gamelog[3].msg).toBe('Damn dawg, you challenged the swag monster with no swag! He swagged on you mofo! Go get you some swag!');
+    });
+
+    it('? command should prompt command options properly', () => {
+      drew.command = '?';
+      drew.processInput();
+      expect(drew.gamelog[3].msg).toBe('walk through the portal | say <message> | swag on the swag monster');
+    });
+
+    it('should say something when say<message> command is entered', () => {
+      drew.command = 'say hello';
+      drew.processInput();
+      expect(drew.gamelog[3].msg).toBe('hello');
+    });
+  });
+
+  describe('processInput function tests for swag room', () => {
+    beforeEach(() => {
+      drew.startGame();
+      drew.command = 'walk through the portal';
+      drew.processInput();
+    });
+
+    it('should prompt properly upon entering the swag room', () => {
+      expect(drew.gamelog[3].msg).toBe('You are in the swag room. There is some sick swag on the ceiling.');
+    });
+
+    it('should prompt options properly upon entering the swag room', () => {
+      expect(drew.gamelog[4].msg).toBe('pick up swag | look for rubies | swag talk says <message> | walk through the portal');
+    });
+
+    it('should pick up swag properly', () => {
+      drew.command = 'pick up swag';
+      drew.processInput();
+      expect(drew.gamelog[6].msg).toBe('Now you got the swag, go swag on that swag monster!');
+    });
   });
 });
