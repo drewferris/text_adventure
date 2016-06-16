@@ -4,10 +4,10 @@ const webpack = require('webpack-stream');
 const Server = require('karma').Server;
 
 const paths = {
-  html: './app/index.hmtl',
+  html: './app/index.html',
   js: './app/js/client.js',
   css: ',/app/css/app.css',
-  tests: './test/comtroller_test.js'
+  tests: './test/controller_test.js'
 };
 
 gulp.task('bundle', ['clean'], () => {
